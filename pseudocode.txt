@@ -1,0 +1,23 @@
+STORE "listItems" AS ARRAY OF OBJECT/RECORD OF [
+  {name : "coffee", price : 10000}, 
+  {name : "tea", price : 5000}, 
+  {name : "milk", price : 12000}
+]
+STORE "total" AS NUMBER WITH 0
+
+Transaction ("tea", 2)
+Transaction ("milk", 1)
+
+FUNCTION Transaction (itemName, amountItem)
+  IF "itemName" EQUAL name OF listItems WITH INDEX OF 0 THEN
+    RETURN ("total" PLUS WIT  H "price" OF "item" WITH INDEX OF 0 TIMES amountItem)
+  ELSE IF "itemName" EQUAL name OF listItems WITH INDEX OF 1 THEN
+    RETURN ("total" PLUS WITH "price" OF "item" WITH INDEX OF 1 TIMES amountItem)
+  ELSE IF "itemName" EQUAL name OF listItems WITH INDEX OF 2 THEN
+    RETURN ("total" PLUS WITH "price" OF "item" WITH INDEX OF 2 TIMES amountItem)
+  ELSE
+    DISPLAY "Invalid item name"
+  END IF
+END FUNCTION
+
+DISPLAY ("total transaction: ", total);
